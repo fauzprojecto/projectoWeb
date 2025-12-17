@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
 * {
     margin: 0;
     padding: 0;
@@ -45,6 +46,17 @@ nav {
 
 .logo a{
     font-weight: 800;
+    text-decoration: none;
+    border-radius: 10px;
+    padding: 10px 20px;
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, .2);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+}
+
+.logo a:hover {
+    text-shadow: 0 0 5px rgb(210, 247, 247);
 }
 
 .menu-toggle{
@@ -54,15 +66,12 @@ nav {
     cursor: pointer;
 }
 
-
 .menu-toggle p{
     position: absolute;
     transform-origin: top left;
     will-change: transform,opacity;
     font-weight: 800;
-    font-size: 20px
-    
-
+    font-size: 20px;
 }
 
 .menu-toggle p:hover {
@@ -71,8 +80,11 @@ nav {
     backdrop-filter: blur(10px);
     box-shadow: 0 0 10px rgba(0, 0, 0, .2);
     bottom: 1px;
-    
-     
+}
+
+.menu-toggle p#menu-close{
+    opacity: 0;
+    transform: translateX(-5px) translateY(10px) rotate(5deg); 
 }
 
 .menu-overlay{
@@ -81,6 +93,7 @@ nav {
     height: 100svh;
     background-color: #0f0f0f;
     z-index: 1;
+    clip-path: polygon(0% 0%, 100% 0, 100% 0, 0% 0%);
 }
 
 .menu-content {
@@ -92,6 +105,8 @@ nav {
     align-items: center;
     transform-origin: left bottom;
     will-change: transform, opacity;
+    transform: translateX(-100px) translateY(-100px) scale(1.5) rotate(-15deg);
+    opacity: 0.25;
 }
 
 .menu-items, .menu-footer{
@@ -103,7 +118,6 @@ nav {
 
 .col-lg{
     flex:3;
-
 }
 
 .col-sm{
@@ -117,14 +131,19 @@ nav {
 }
 
 .menu-preview-img{
-    position:relative;
-    width:45%;
+    position: relative;
+    width: 45%;
     height: clamp(300px, 60vh, 600px);
     overflow: hidden;
 }
 
 .menu-preview-img img {
     position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
     will-change: transform, opacity;
 }
 
@@ -139,18 +158,19 @@ nav {
     display: flex;
     flex-direction: column;
     gap: 0.5em;
-
 }
 
 .link, .social{
     padding-bottom: 6px;
-    clip-path: polygon(0 0, 100% 100%, 0%, 100%)
+    clip-path: polygon(0 0, 100% 100%, 0%, 100%);
 }
 
 .link a, .social a {
     display: inline-block;
     will-change: transform;
     transition: color 0.5s;
+    transform: translateY(120%);
+    opacity: 0.25;
 }
 
 .link a{
@@ -160,12 +180,10 @@ nav {
 
 .social a{
     color: #8f8f8f;
-
 }
 
 .social a:hover {
     color: #fff;
-
 }
 
 .menu-footer {
@@ -190,9 +208,9 @@ nav {
     background: #fff;
     transform: scaleX(0);
     transform-origin: right;
-    transition: transform 0.3s cubic bezier(0.6, 0, 0.4, 1);
-
+    transition: transform 0.3s cubic-bezier(0.6, 0, 0.4, 1);
 }
+
 .link a:hover::after,
 .social a:hover::after,
 .menu-footer a:hover::after{
@@ -206,7 +224,6 @@ nav {
     height: 100%;
     will-change: transform;
     transform-origin: right top;
-
 }
 
 .hero{
@@ -230,27 +247,13 @@ nav {
 
 .hero h1{
     width: 80%;
-
 }
 
-.menu-toggle p#menu-close{
-    opacity: 0;
-    transform: translateX(-5px) translateY(10px) rotate(5deg); 
+.navbar {
+  font-size: 18px;
 }
 
-.link a, .social a{
-    transform: translateY(120%);
-    opacity: 0.25;
-}
-
-.menu-content {
-    transform: translateX(-100px) translateY(-100px) scale(1.5) rotate(-15deg);
-    opacity: 0.25;
-}
-.menu-overlay{
-    clip-path: polygon(0% 0%, 100% 0, 100% 0, 0% 0%);
-}
-
+/* Desktop responsive */
 @media(max-width: 900px){
     .hero h1{
         width: 100%;
@@ -258,8 +261,15 @@ nav {
         letter-spacing: 0;
     }
 
-    .menu-items .col-lg {
-        display: none;
+    .menu-items {
+        flex-direction: column;
+        gap: 1.5em;
+    }
+
+    .menu-preview-img {
+        display: block;
+        width: 100%;
+        height: 200px;
     }
 
     .link a::after,
@@ -269,30 +279,24 @@ nav {
     }
 }
 
-.logo a{
-    text-decoration: none;
-    border-radius: 10px;
-    padding: 10px 20px;
-    background: transparent;
-    border: 2px solid rgba(255, 255, 255, .2);
-    backdrop-filter: blur(10px);
-    box-shadow: 0 0 10px rgba(0, 0, 0, .2);
 
+@media(max-width: 600px){
+    .hero h1{
+        font-size: 2rem;
+        width: 100%;
+    }
+
+    .menu-items {
+        flex-direction: column;
+        gap: 1em;
+    }
+
+    .menu-items .col-sm{
+        width: 100%;
+        padding: 1em 0;
+    }
+
+    .link a{
+        font-size: 2rem;
+    }
 }
-
-.logo a:hover {
-    text-shadow: 0 0 5px rgb(210, 247, 247);
-         
-}
-.navbar {
-  font-size: 18px;
-}
-@media (max-width: 768px) {
-  .navbar {
-    font-size: 14px;
-  }
-}
-
-
-
-

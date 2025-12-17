@@ -59,11 +59,20 @@ nav {
     position: absolute;
     transform-origin: top left;
     will-change: transform,opacity;
+    font-weight: 800;
+    font-size: 20px
+    
 
 }
 
 .menu-toggle p:hover {
-    text-shadow: 0 0 10px rgb(210, 247, 247) 
+    text-shadow: 0 0 10px rgb(210, 247, 247);
+    background: transparent;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+    bottom: 1px;
+    
+     
 }
 
 .menu-overlay{
@@ -272,7 +281,7 @@ nav {
 }
 
 .logo a:hover {
-    text-shadow: 0 0 5px rgb(210, 247, 247) 
+    text-shadow: 0 0 5px rgb(210, 247, 247);
          
 }
 .navbar {
@@ -283,6 +292,7 @@ nav {
     font-size: 14px;
   }
 }
+
 
 
 

@@ -139,7 +139,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   menuLinks.forEach((link) => {
-    link.addEventListener("mouseenter", () => {
+    function changeImage() {
       if (!isOpen || isAnimating) return;
 
       const src = link.dataset.img;
@@ -163,6 +163,9 @@ document.addEventListener("DOMContentLoaded", () => {
         duration: 0.75,
         ease: "power2.out",
       });
-    });
+    }
+
+    link.addEventListener("mouseenter", changeImage); // desktop hover
+    link.addEventListener("click", changeImage);     // mobile tap
   });
 });

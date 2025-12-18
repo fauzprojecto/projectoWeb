@@ -11,6 +11,8 @@ html, body {
     height: 100%;
     overscroll-behavior: none;
     overflow-x:hidden;
+    background-color: #0f0f0f;
+    font-size: clamp(14px, 1.2vw, 16px);
 }
 
 
@@ -25,7 +27,6 @@ body.menu-open {
     touch-action: none;
     position: fixed;
     inset: 0;
-    touch-action: none;
 }
 
 
@@ -37,9 +38,9 @@ img {
 
 h1{
     color: white;
-    font-size: 7rem;
+    font-size: clamp(2.2rem, 6vw, 7rem);
+    letter-spacing: clamp(-0.05rem, -0.3vw, -0.2rem);
     font-weight: 400;
-    letter-spacing: -0.2rem;
     line-height: 1;
 }
 
@@ -60,6 +61,8 @@ nav {
     justify-content: space-between;
     align-items: center;
     z-index: 2;
+    height: 72px;
+
 }
 
 .logo a{
@@ -112,6 +115,8 @@ nav {
     background-color: #0f0f0f;
     z-index: 1;
     clip-path: polygon(0% 0%, 100% 0, 100% 0, 0% 0%);
+    
+   
 }
 
 .menu-content {
@@ -150,8 +155,8 @@ nav {
 
 .menu-preview-img{
     position: relative;
-    width: 45%;
-    height: clamp(300px, 60vh, 600px);
+    width: 40%;
+    height: clamp(500px, 55vh, 550px);
     overflow: hidden;
 }
 
@@ -160,13 +165,15 @@ nav {
     top: 0;
     left: 0;
     width: 100%;
-    height: 500px;
+    height: 100%;
+    max-height: 100%;
     object-fit: cover;
+    object-position: center;
     will-change: transform, opacity;
 }
 
 .menu-items .col-sm {
-    padding: 2.5em 0;
+    padding: 1.0em 0;
     display: flex;
     flex-direction: column;
     gap: 2.5em;
@@ -183,6 +190,7 @@ nav {
     clip-path: polygon(0 0, 100% 100%, 0%, 100%);
 }
 
+
 .link a, .social a {
     display: inline-block;
     will-change: transform;
@@ -192,7 +200,7 @@ nav {
 }
 
 .link a{
-    font-size: 3.5rem;
+    font-size: clamp(1.8rem, 4vw, 3.5rem);
     letter-spacing: -0.02rem;
 }
 
@@ -252,6 +260,8 @@ nav {
     display: flex;
     align-items: flex-end;
     overflow: hidden;
+    padding-top: calc(72px + 2.5em);
+    
 }
 
 .hero img{
@@ -264,126 +274,30 @@ nav {
 }
 
 .hero h1{
-    width: 80%;
+    width: min(90%, 900px);
 }
 
 .navbar {
   font-size: 18px;
 }
+@media (max-width: 1024px) {
+  .menu-items {
+    flex-direction: column;
+  }
 
-/* ===========================
-   Tablet & layar kecil
-=========================== */
-@media (max-width: 900px) {
+  .menu-preview-img {
+    width: 70%;
+  }
 
-    .hero h1 {
-        width: 100%;
-        font-size: 4rem;
-        letter-spacing: 0;
+  .col-lg,
+  .col-sm {
+    flex: unset;
+    width: 100%;
+
     }
-
-    /* Wrapper preview image */
-    .menu-preview-img {
-        width: 260px;
-        aspect-ratio: 3 / 5;      /* SEMUA FOTO KONSISTEN */
-        height: auto;
-        overflow: hidden;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-shrink: 0;           /* ⬅️ PENTING: jangan mengecil sendiri */
-    }
-
-    .menu-preview-img img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;        /* aman, ga gepeng */
-    }
+  .logo a{
+    margin-right: 50px;
+  }
 }
 
 
-/* ===========================
-   Mobile (FIX AMBURADUL TOTAL)
-=========================== */
-@media (max-width: 600px) {
-
-    /* LOCK viewport agar zoom/scroll ga nembus */
-    html, body {
-        overscroll-behavior: none;
-    }
-
-    /* Overlay aman */
-    .menu-overlay {
-        overflow-y: auto;
-        -webkit-overflow-scrolling: touch;
-    }
-
-    /* MATIKAN transform berat di HP */
-    .menu-content {
-        height: auto;
-        min-height: 100dvh;
-        transform: none !important;
-        opacity: 1 !important;
-        padding-top: 6rem;
-        padding-bottom: 4rem;
-    }
-
-    .hero h1 {
-        font-size: 2rem;
-        width: 100%;
-        line-height: 1.2;
-    }
-
-    /* Layout menu */
-    .menu-items {
-        flex-direction: column;
-        align-items: center;
-        gap: 2rem;
-        height: auto;
-    }
-
-    .col-lg,
-    .col-sm {
-        width: 100%;
-        flex: none;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .menu-items .col-sm {
-        padding: 0;
-        text-align: center;
-        gap: 1.5rem;
-    }
-
-    /* Teks menu */
-    .link a {
-        font-size: 2.2rem;
-        line-height: 1.25;
-        white-space: nowrap;     /* ⬅️ cegah teks loncat */
-    }
-
-    .menu-social a {
-        font-size: 0.95rem;
-    }
-
-    /* Preview image HP — PALING KRUSIAL */
-    .menu-preview-img {
-        width: 85%;
-        max-width: 320px;
-        aspect-ratio: 3 / 5;     /* SEMUA FOTO SAMA */
-        height: auto;
-        overflow: hidden;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-shrink: 0;          /* ⬅️ INI SOLUSI FOTO DZAKI KECIL */
-    }
-
-    .menu-preview-img img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-}

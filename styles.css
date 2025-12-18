@@ -10,6 +10,7 @@ html, body {
     width: 100%;
     height: 100%;
     overscroll-behavior: none;
+    overflow-x:hidden;
 }
 
 
@@ -21,6 +22,9 @@ body {
 body.menu-open {
     overflow: hidden;
     height: 100vh;
+    touch-action: none;
+    position: fixed;
+    inset: 0;
     touch-action: none;
 }
 
@@ -281,37 +285,45 @@ nav {
     /* Wrapper preview image */
     .menu-preview-img {
         width: 260px;
-        aspect-ratio: 3 / 5;   /* ⬅️ KUNCI BIAR SEMUA FOTO SAMA */
+        aspect-ratio: 3 / 5;      /* SEMUA FOTO KONSISTEN */
         height: auto;
         overflow: hidden;
         display: flex;
         align-items: center;
         justify-content: center;
+        flex-shrink: 0;           /* ⬅️ PENTING: jangan mengecil sendiri */
     }
 
     .menu-preview-img img {
         width: 100%;
         height: 100%;
-        object-fit: cover;    /* ⬅️ GANTI DARI contain */
+        object-fit: cover;        /* aman, ga gepeng */
     }
 }
 
 
 /* ===========================
-   Mobile
+   Mobile (FIX AMBURADUL TOTAL)
 =========================== */
 @media (max-width: 600px) {
 
-    /* Biar menu bisa discroll dan ga nembus */
-    .menu-overlay {
-        overflow-y: auto;
+    /* LOCK viewport agar zoom/scroll ga nembus */
+    html, body {
+        overscroll-behavior: none;
     }
 
+    /* Overlay aman */
+    .menu-overlay {
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    /* MATIKAN transform berat di HP */
     .menu-content {
         height: auto;
-        min-height: 100svh;
-        transform: none;
-        opacity: 1;
+        min-height: 100dvh;
+        transform: none !important;
+        opacity: 1 !important;
         padding-top: 6rem;
         padding-bottom: 4rem;
     }
@@ -336,12 +348,12 @@ nav {
         flex: none;
         display: flex;
         justify-content: center;
+        align-items: center;
     }
 
     .menu-items .col-sm {
         padding: 0;
         text-align: center;
-        align-items: center;
         gap: 1.5rem;
     }
 
@@ -349,28 +361,29 @@ nav {
     .link a {
         font-size: 2.2rem;
         line-height: 1.25;
+        white-space: nowrap;     /* ⬅️ cegah teks loncat */
     }
 
     .menu-social a {
         font-size: 0.95rem;
     }
 
-    /* Preview image HP (KONSISTEN SEMUA FOTO) */
+    /* Preview image HP — PALING KRUSIAL */
     .menu-preview-img {
         width: 85%;
         max-width: 320px;
-        aspect-ratio: 3 / 5; 
+        aspect-ratio: 3 / 5;     /* SEMUA FOTO SAMA */
         height: auto;
         overflow: hidden;
         display: flex;
         align-items: center;
         justify-content: center;
+        flex-shrink: 0;          /* ⬅️ INI SOLUSI FOTO DZAKI KECIL */
     }
 
     .menu-preview-img img {
         width: 100%;
         height: 100%;
-        object-fit: cover;    
+        object-fit: cover;
     }
 }
-

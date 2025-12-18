@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function resetPreviewImage() {
     menuPreviewImg.innerHTML = "";
     const img = document.createElement("img");
-    img.src = "img-1.jpeg";
+    img.src = "img-1.jpg";
     img.style.opacity = "1";
     menuPreviewImg.appendChild(img);
   }
@@ -165,8 +165,8 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     }
 
-    link.addEventListener("mouseenter", changeImage); // desktop hover
-    link.addEventListener("click", changeImage);     // mobile tap
+    link.addEventListener("mouseenter", changeImage); 
+    link.addEventListener("click", changeImage);   
   });
 
   const body = document.body;
@@ -178,5 +178,11 @@ menuOpen.addEventListener("click", () => {
 menuClose.addEventListener("click", () => {
     body.classList.remove("menu-open");
 });
+function cleanupPreviewImages() {
+  const imgs = menuPreviewImg.querySelectorAll("img");
+  if (imgs.length > 2) {
+    imgs[0].remove(); 
+  }
+}
 
 });

@@ -6,11 +6,24 @@
     box-sizing: border-box; 
 }
 
+html, body {
+    width: 100%;
+    height: 100%;
+    overscroll-behavior: none;
+}
+
+
 body {
     font-family: "TWK Lausanne", "Inter", sans-serif;
     overflow-x: hidden;
-    background-color: #000;
 }
+
+body.menu-open {
+    overflow: hidden;
+    height: 100vh;
+    touch-action: none;
+}
+
 
 img {
     width: 100%;
@@ -42,7 +55,7 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    z-index: 10;
+    z-index: 2;
 }
 
 .logo a{
@@ -80,6 +93,7 @@ nav {
     background: transparent;
     backdrop-filter: blur(10px);
     box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+    bottom: 1px;
 }
 
 .menu-toggle p#menu-close{
@@ -92,7 +106,7 @@ nav {
     width: 100vw;
     height: 100svh;
     background-color: #0f0f0f;
-    z-index: 5;
+    z-index: 1;
     clip-path: polygon(0% 0%, 100% 0, 100% 0, 0% 0%);
 }
 
@@ -142,7 +156,7 @@ nav {
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: 500px;
     object-fit: cover;
     will-change: transform, opacity;
 }
@@ -154,7 +168,7 @@ nav {
     gap: 2.5em;
 }
 
-.menu-links, .menu-socials {
+.menu-link, .menu-social {
     display: flex;
     flex-direction: column;
     gap: 0.5em;
@@ -253,60 +267,110 @@ nav {
   font-size: 18px;
 }
 
-/* Desktop responsive */
-@media(max-width: 900px){
-    .hero h1{
+/* ===========================
+   Tablet & layar kecil
+=========================== */
+@media (max-width: 900px) {
+
+    .hero h1 {
         width: 100%;
         font-size: 4rem;
         letter-spacing: 0;
     }
 
-    .menu-items {
-        flex-direction: column;
-        gap: 1.5em;
+    /* Wrapper preview image */
+    .menu-preview-img {
+        width: 260px;
+        aspect-ratio: 3 / 5;   /* ⬅️ KUNCI BIAR SEMUA FOTO SAMA */
+        height: auto;
+        overflow: hidden;
+        display: flex;
         align-items: center;
+        justify-content: center;
     }
 
-    .menu-preview-img {
-        display: block;       
+    .menu-preview-img img {
         width: 100%;
-        height: 200px;        
-        margin-bottom: 1em;
+        height: 100%;
+        object-fit: cover;    /* ⬅️ GANTI DARI contain */
+    }
+}
+
+
+/* ===========================
+   Mobile
+=========================== */
+@media (max-width: 600px) {
+
+    /* Biar menu bisa discroll dan ga nembus */
+    .menu-overlay {
+        overflow-y: auto;
+    }
+
+    .menu-content {
+        height: auto;
+        min-height: 100svh;
+        transform: none;
+        opacity: 1;
+        padding-top: 6rem;
+        padding-bottom: 4rem;
+    }
+
+    .hero h1 {
+        font-size: 2rem;
+        width: 100%;
+        line-height: 1.2;
+    }
+
+    /* Layout menu */
+    .menu-items {
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+        height: auto;
+    }
+
+    .col-lg,
+    .col-sm {
+        width: 100%;
+        flex: none;
+        display: flex;
+        justify-content: center;
     }
 
     .menu-items .col-sm {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
+        padding: 0;
+        text-align: center;
         align-items: center;
-        gap: 1em;
+        gap: 1.5rem;
     }
 
-    .link a::after,
-    .social a::after,
-    .menu-footer a::after{
-        display: none;
+    /* Teks menu */
+    .link a {
+        font-size: 2.2rem;
+        line-height: 1.25;
+    }
+
+    .menu-social a {
+        font-size: 0.95rem;
+    }
+
+    /* Preview image HP (KONSISTEN SEMUA FOTO) */
+    .menu-preview-img {
+        width: 85%;
+        max-width: 320px;
+        aspect-ratio: 3 / 5; 
+        height: auto;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .menu-preview-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;    
     }
 }
 
-/* HP small */
-@media(max-width: 600px){
-    .hero h1{
-        font-size: 2rem;
-        width: 100%;
-    }
-
-    .menu-items {
-        flex-direction: column;
-        gap: 1em;
-    }
-
-    .menu-items .col-sm{
-        width: 100%;
-        padding: 1em 0;
-    }
-
-    .link a{
-        font-size: 2rem;
-    }
-}

@@ -168,4 +168,15 @@ document.addEventListener("DOMContentLoaded", () => {
     link.addEventListener("mouseenter", changeImage); // desktop hover
     link.addEventListener("click", changeImage);     // mobile tap
   });
+
+  const body = document.body;
+
+menuOpen.addEventListener("click", () => {
+    body.classList.add("menu-open");
+});
+
+menuClose.addEventListener("click", () => {
+    body.classList.remove("menu-open");
+});
+
 });

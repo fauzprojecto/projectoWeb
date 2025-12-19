@@ -5,6 +5,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const menuContent = document.querySelector(".menu-content");
   const menuPreviewImg = document.querySelector(".menu-preview-img");
   const menuLinks = document.querySelectorAll(".link a");
+  const menuOpen = document.querySelector("#menu-open");
+const menuClose = document.querySelector("#menu-close");
+  
 
   let isOpen = false;
   let isAnimating = false;
@@ -171,18 +174,45 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const body = document.body;
 
-menuOpen.addEventListener("click", () => {
+  menuOpen.addEventListener("click", () => {
     body.classList.add("menu-open");
 });
 
-menuClose.addEventListener("click", () => {
+  menuClose.addEventListener("click", () => {
     body.classList.remove("menu-open");
 });
-function cleanupPreviewImages() {
-  const imgs = menuPreviewImg.querySelectorAll("img");
+  function cleanupPreviewImages() {
+    const imgs = menuPreviewImg.querySelectorAll("img");
   if (imgs.length > 2) {
     imgs[0].remove(); 
   }
 }
 
 });
+function goToLogin(event) {
+  event.preventDefault(); 
+
+  const tl = gsap.timeline({
+    onComplete: () => {
+      window.location.href = "login.html";
+    }
+  });
+
+  tl.to("nav", {
+    y: -50,
+    opacity: 0,
+    duration: 0.5,
+    ease: "power2.inOut"
+  });
+
+  tl.to(".page-content", {
+    y: 200,
+    scale: 0.9,
+    opacity: 0,
+    duration: 0.8,
+    ease: "power4.inOut"
+  }, "-=0.3");
+}
+
+
+

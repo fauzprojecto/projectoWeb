@@ -24,7 +24,6 @@ body {
 body.menu-open {
     overflow: hidden;
     height: 100vh;
-    touch-action: none;
     position: fixed;
     inset: 0;
 }
@@ -158,6 +157,7 @@ nav {
     width: 40%;
     height: clamp(500px, 55vh, 550px);
     overflow: hidden;
+    pointer-events: none;
 }
 
 .menu-preview-img img {
@@ -187,7 +187,7 @@ nav {
 
 .link, .social{
     padding-bottom: 6px;
-    clip-path: polygon(0 0, 100% 100%, 0%, 100%);
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
 }
 
 
@@ -197,6 +197,7 @@ nav {
     transition: color 0.5s;
     transform: translateY(120%);
     opacity: 0.25;
+    position: relative;
 }
 
 .link a{
@@ -299,5 +300,6 @@ nav {
     margin-right: 50px;
   }
 }
+
 
 

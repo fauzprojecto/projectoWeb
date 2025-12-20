@@ -305,6 +305,7 @@ nav {
     position: relative;
     display: flex;
     align-items: center;
+    padding-top: 50px;
 }
 
 
@@ -316,6 +317,7 @@ nav {
     object-fit: cover;
     border: 2px solid rgba(255,255,255,0.6);
     transition: transform 0.2s ease, box-shadow 0.3s ease;
+
 }
 
 .profile img:hover {
@@ -364,6 +366,29 @@ nav {
 .profile-menu button:hover {
     transform: translateY(-1px);
     box-shadow: 0 0 10px #0ef;
+}
+.profile-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.profile-hello {
+    font-size: 0.95rem;
+    opacity: 0.85;
+    color: #fff;
+    white-space: nowrap;
+    padding: 8px;
+    font-weight: 500;
+    pointer-events: none;
+    animation: lawak 1s linear infinite;
+}
+
+@keyframes lawak {
+  100% {
+    filter: hue-rotate(360deg);
+  }
 }
 
 

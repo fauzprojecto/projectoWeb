@@ -86,17 +86,8 @@ signUpForm.addEventListener("submit", async (e) => {
 signInForm.addEventListener("submit", async (e) => {
   e.preventDefault();
 
-  const email = signInForm.querySelector(
-    'input[type="text"]'
-  ).value.trim();
-  const password = signInForm.querySelector(
-    'input[type="password"]'
-  ).value;
-
-  if (!email || !password) {
-    alert("Email dan password wajib diisi!");
-    return;
-  }
+  const email = signInForm.querySelector('input[type="email"]').value.trim();
+  const password = signInForm.querySelector('input[type="password"]').value;
 
   const { data, error } = await sb.auth.signInWithPassword({
     email,
@@ -107,6 +98,9 @@ signInForm.addEventListener("submit", async (e) => {
     alert("Login gagal: " + error.message);
     return;
   }
+
+  localStorage.setItem("isLoggedIn", "true");
+  localStorage.setItem("userEmail", data.user.email);
 
   alert("Login berhasil!");
   window.location.href = "index.html";

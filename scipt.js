@@ -213,6 +213,63 @@ function goToLogin(event) {
     ease: "power4.inOut"
   }, "-=0.3");
 }
+document.addEventListener("DOMContentLoaded", () => {
+  const isLoggedIn = localStorage.getItem("isLoggedIn");
+
+  const loginBtn = document.getElementById("login-btn");
+  const profileArea = document.getElementById("profile-area");
+
+  if (isLoggedIn === "true") {
+    
+    loginBtn.style.display = "none";
+
+    
+    profileArea.style.display = "block";
+  }
+
+  
+});
+function logout() {
+  localStorage.clear();
+  window.location.reload();
+}
+document.addEventListener("DOMContentLoaded", () => {
+  const isLoggedIn = localStorage.getItem("isLoggedIn");
+  const email = localStorage.getItem("userEmail");
+
+  const loginBtn = document.getElementById("login-btn");
+  const profileArea = document.getElementById("profile-area");
+  const profileImg = document.getElementById("profile-img");
+  const profileMenu = document.getElementById("profile-menu");
+  const profileEmail = document.getElementById("profile-email");
+  const logoutBtn = document.getElementById("logout-btn");
+
+  if (isLoggedIn === "true") {
+    loginBtn.style.display = "none";
+    profileArea.style.display = "block";
+    profileEmail.textContent = email;
+  }
+
+
+  profileImg?.addEventListener("click", () => {
+    profileMenu.style.display =
+      profileMenu.style.display === "block" ? "none" : "block";
+  });
+ 
+  logoutBtn?.addEventListener("click", () => {
+    localStorage.clear();
+    window.location.reload();
+  });
+
+  
+  document.addEventListener("click", (e) => {
+    if (!profileArea.contains(e.target)) {
+      profileMenu.style.display = "none";
+    }
+  });
+});
+
+
 
 
 

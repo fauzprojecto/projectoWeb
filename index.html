@@ -8,9 +8,22 @@
 </head>
 <body>
     <nav>
-        <div class="logo">  
-            <a href="login.html" onclick="goToLogin(event)">Login</a>
+        <div class="logo">
+            <a href="login.html" id="login-btn" onclick="goToLogin(event)">Login</a>
+
+  
+            <div class="profile" id="profile-area" style="display:none;">
+                <img src="avatar.png" alt="Profile" id="profile-img">
+
+  
+                <div class="profile-menu" id="profile-menu">
+                    <p id="profile-email">user@email.com</p>
+                    <button id="logout-btn">Logout</button>
+                </div>
+            </div>
+
         </div>
+
         <div class="menu-toggle">
             <p id="menu-open">Menu</p>
             <p id="menu-close">Close</p>
@@ -63,7 +76,7 @@
         </section>
     </div>
     <script src="https://unpkg.com/gsap@3/dist/gsap.min.js"></script>
-    <script src="scipt_o.js"></script>
+    <script src="scipt.js"></script>
 </body>
 
 </html>

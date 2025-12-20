@@ -1,273 +1,396 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const container = document.querySelector(".container");
-  const menuToggle = document.querySelector(".menu-toggle");
-  const menuOverlay = document.querySelector(".menu-overlay");
-  const menuContent = document.querySelector(".menu-content");
-  const menuPreviewImg = document.querySelector(".menu-preview-img");
-  const menuLinks = document.querySelectorAll(".link a");
-  const menuOpen = document.querySelector("#menu-open");
-const menuClose = document.querySelector("#menu-close");
-  
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
-  let isOpen = false;
-  let isAnimating = false;
-
-  menuToggle.addEventListener("click", () => {
-    if (!isOpen) openMenu();
-    else closeMenu();
-  });
-
-  function resetPreviewImage() {
-    menuPreviewImg.innerHTML = "";
-    const img = document.createElement("img");
-    img.src = "img-1.jpg";
-    img.style.opacity = "1";
-    menuPreviewImg.appendChild(img);
-  }
-
-  function cleanupPreviewImages() {
-    const imgs = menuPreviewImg.querySelectorAll("img");
-    if (imgs.length > 3) {
-      for (let i = 0; i < imgs.length - 3; i++) {
-        imgs[i].remove();
-      }
-    }
-  }
-
-  function animateMenuToggle(opening) {
-    const open = document.querySelector("#menu-open");
-    const close = document.querySelector("#menu-close");
-
-    gsap.to(opening ? open : close, {
-      opacity: 0,
-      x: opening ? -5 : 5,
-      y: opening ? -10 : 10,
-      rotation: opening ? -5 : 5,
-      duration: 0.5,
-      ease: "power2.out",
-    });
-
-    gsap.to(opening ? close : open, {
-      opacity: 1,
-      x: 0,
-      y: 0,
-      rotation: 0,
-      delay: 0.25,
-      duration: 0.5,
-      ease: "power2.out",
-    });
-  }
-
-  function openMenu() {
-    if (isAnimating || isOpen) return;
-    isAnimating = true;
-
-    resetPreviewImage();
-    animateMenuToggle(true);
-
-    gsap.to(container, {
-      rotation: 10,
-      x: 300,
-      y: 450,
-      scale: 1.5,
-      duration: 1.25,
-      ease: "power4.inOut",
-    });
-
-    gsap.to(menuContent, {
-      rotation: 0,
-      x: 0,
-      y: 0,
-      scale: 1,
-      opacity: 1,
-      duration: 1.25,
-      ease: "power4.inOut",
-    });
-
-    gsap.to([".link a", ".social a"], {
-      y: "0%",
-      opacity: 1,
-      delay: 0.75,
-      stagger: 0.1,
-      duration: 1,
-      ease: "power3.out",
-    });
-
-    gsap.to(menuOverlay, {
-      clipPath: "polygon(0% 0%, 100% 0%, 100% 175%, 0% 100%)",
-      duration: 1.25,
-      ease: "power4.inOut",
-      onComplete: () => {
-        isOpen = true;
-        isAnimating = false;
-      },
-    });
-  }
-
-  function closeMenu() {
-    if (isAnimating || !isOpen) return;
-    isAnimating = true;
-
-    animateMenuToggle(false);
-
-    gsap.to(container, {
-      rotation: 0,
-      x: 0,
-      y: 0,
-      scale: 1,
-      duration: 1.25,
-      ease: "power4.inOut",
-    });
-
-    gsap.to(menuContent, {
-      rotation: -15,
-      x: -100,
-      y: -100,
-      scale: 1.5,
-      opacity: 0.25,
-      duration: 1.25,
-      ease: "power4.inOut",
-    });
-
-    gsap.to(menuOverlay, {
-      clipPath: "polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)",
-      duration: 1.25,
-      ease: "power4.inOut",
-      onComplete: () => {
-        isOpen = false;
-        isAnimating = false;
-        gsap.set([".link a", ".social a"], { y: "120%" });
-      },
-    });
-  }
-
-  menuLinks.forEach((link) => {
-    function changeImage() {
-      if (!isOpen || isAnimating) return;
-
-      const src = link.dataset.img;
-      if (!src) return;
-
-      const imgs = menuPreviewImg.querySelectorAll("img");
-      if (imgs.length && imgs[imgs.length - 1].src.includes(src)) return;
-
-      const img = document.createElement("img");
-      img.src = src;
-      img.style.opacity = "0";
-      img.style.transform = "scale(1.25) rotate(10deg)";
-      menuPreviewImg.appendChild(img);
-
-      cleanupPreviewImages();
-
-      gsap.to(img, {
-        opacity: 1,
-        scale: 1,
-        rotation: 0,
-        duration: 0.75,
-        ease: "power2.out",
-      });
-    }
-
-    link.addEventListener("mouseenter", changeImage); 
-    link.addEventListener("click", changeImage);   
-  });
-
-  const body = document.body;
-
-  menuOpen.addEventListener("click", () => {
-    body.classList.add("menu-open");
-});
-
-  menuClose.addEventListener("click", () => {
-    body.classList.remove("menu-open");
-});
-  function cleanupPreviewImages() {
-    const imgs = menuPreviewImg.querySelectorAll("img");
-  if (imgs.length > 2) {
-    imgs[0].remove(); 
-  }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; 
 }
 
-});
-function goToLogin(event) {
-  event.preventDefault(); 
-
-  const tl = gsap.timeline({
-    onComplete: () => {
-      window.location.href = "login.html";
-    }
-  });
-
-  tl.to("nav", {
-    y: -50,
-    opacity: 0,
-    duration: 0.5,
-    ease: "power2.inOut"
-  });
-
-  tl.to(".page-content", {
-    y: 200,
-    scale: 0.9,
-    opacity: 0,
-    duration: 0.8,
-    ease: "power4.inOut"
-  }, "-=0.3");
+html, body {
+    width: 100%;
+    height: 100%;
+    overscroll-behavior: none;
+    overflow-x:hidden;
+    background-color: #0f0f0f;
+    font-size: clamp(14px, 1.2vw, 16px);
 }
-document.addEventListener("DOMContentLoaded", () => {
-  const isLoggedIn = localStorage.getItem("isLoggedIn");
 
-  const loginBtn = document.getElementById("login-btn");
-  const profileArea = document.getElementById("profile-area");
 
-  if (isLoggedIn === "true") {
+body {
+    font-family: "TWK Lausanne", "Inter", sans-serif;
+    overflow-x: hidden;
+}
+
+body.menu-open {
+    overflow: hidden;
+    height: 100vh;
+    position: fixed;
+    inset: 0;
+}
+
+
+img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+h1{
+    color: white;
+    font-size: clamp(2.2rem, 6vw, 7rem);
+    letter-spacing: clamp(-0.05rem, -0.3vw, -0.2rem);
+    font-weight: 400;
+    line-height: 1;
+}
+
+a, p{
+    position: relative;
+    text-decoration: none;
+    color: white;
+    font-size: 1rem;
+    font-weight: 300;
+    user-select: none;
+}
+
+nav {
+    position: fixed;
+    width: 100vw;
+    padding: 2.5em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 2;
+    height: 72px;
+
+}
+
+.logo a{
+    font-weight: 800;
+    text-decoration: none;
+    border-radius: 10px;
+    padding: 10px 20px;
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, .2);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+}
+
+.logo a:hover {
+    text-shadow: 0 0 5px rgb(210, 247, 247);
+}
+
+.menu-toggle{
+    position: relative;
+    width: 3rem;
+    height: 1.5rem;
+    cursor: pointer;
+}
+
+.menu-toggle p{
+    position: absolute;
+    transform-origin: top left;
+    will-change: transform,opacity;
+    font-weight: 800;
+    font-size: 20px;
+}
+
+.menu-toggle p:hover {
+    text-shadow: 0 0 10px rgb(184, 243, 234);
+    background: transparent;
+    backdrop-filter: blur(10px);
+    bottom: 1px;
+}
+
+.menu-toggle p#menu-close{
+    opacity: 0;
+    transform: translateX(-5px) translateY(10px) rotate(5deg); 
+}
+
+.menu-overlay{
+    position: fixed;
+    width: 100vw;
+    height: 100svh;
+    background-color: #0f0f0f;
+    z-index: 1;
+    clip-path: polygon(0% 0%, 100% 0, 100% 0, 0% 0%);
     
-    loginBtn.style.display = "none";
-
-    
-    profileArea.style.display = "block";
-  }
-
-  
-});
-function logout() {
-  localStorage.clear();
-  window.location.reload();
+   
 }
-document.addEventListener("DOMContentLoaded", () => {
-  const isLoggedIn = localStorage.getItem("isLoggedIn");
-  const email = localStorage.getItem("userEmail");
 
-  const loginBtn = document.getElementById("login-btn");
-  const profileArea = document.getElementById("profile-area");
-  const profileImg = document.getElementById("profile-img");
-  const profileMenu = document.getElementById("profile-menu");
-  const profileEmail = document.getElementById("profile-email");
-  const logoutBtn = document.getElementById("logout-btn");
+.menu-content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    transform-origin: left bottom;
+    will-change: transform, opacity;
+    transform: translateX(-100px) translateY(-100px) scale(1.5) rotate(-15deg);
+    opacity: 0.25;
+}
 
-  if (isLoggedIn === "true") {
-    loginBtn.style.display = "none";
-    profileArea.style.display = "block";
-    profileEmail.textContent = email;
+.menu-items, .menu-footer{
+    width: 100%;
+    padding: 2.5em;
+    display: flex;
+    gap: 2.5em;
+}
+
+.col-lg{
+    flex:3;
+}
+
+.col-sm{
+    flex:2;
+}
+
+.menu-items, .col-lg{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.menu-preview-img{
+    position: relative;
+    width: 40%;
+    height: clamp(500px, 55vh, 550px);
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.menu-preview-img img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    max-height: 100%;
+    object-fit: cover;
+    object-position: center;
+    will-change: transform, opacity;
+}
+
+.menu-items .col-sm {
+    padding: 1.0em 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2.5em;
+}
+
+.menu-link, .menu-social {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+}
+
+.link, .social{
+    padding-bottom: 6px;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+}
+
+
+.link a, .social a {
+    display: inline-block;
+    will-change: transform;
+    transition: color 0.5s;
+    transform: translateY(120%);
+    opacity: 0.25;
+    position: relative;
+}
+
+.link a{
+    font-size: clamp(1.8rem, 4vw, 3.5rem);
+    letter-spacing: -0.02rem;
+}
+
+.social a{
+    color: #8f8f8f;
+}
+
+.social a:hover {
+    color: #fff;
+}
+
+.menu-footer {
+    position: absolute;
+    bottom: 0;
+}
+
+.menu-footer .col-sm{
+    display: flex;
+    justify-content: space-between;
+}
+
+.link a::after,
+.social a::after,
+.menu-footer a::after{
+    position: absolute;
+    content: "";
+    top: 102.5%;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: #fff;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s cubic-bezier(0.6, 0, 0.4, 1);
+}
+
+.link a:hover::after,
+.social a:hover::after,
+.menu-footer a:hover::after{
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+.container{
+    position: relative;
+    width: 90%;
+    height: 100%;
+    will-change: transform;
+    transform-origin: right top;
+}
+
+.hero{
+    position: relative;
+    width: 100vw;
+    height: 100svh;
+    padding: 2.5em;
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+    padding-top: calc(72px + 2.5em);
+    
+}
+
+.hero img{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100svh;
+    z-index: -1;
+}
+
+.hero h1{
+    width: min(90%, 900px);
+}
+
+.navbar {
+  font-size: 18px;
+}
+@media (max-width: 1024px) {
+  .menu-items {
+    flex-direction: column;
   }
 
+  .menu-preview-img {
+    width: 70%;
+  }
 
-  profileImg?.addEventListener("click", () => {
-    profileMenu.style.display =
-      profileMenu.style.display === "block" ? "none" : "block";
-  });
- 
-  logoutBtn?.addEventListener("click", () => {
-    localStorage.clear();
-    window.location.reload();
-  });
+  .col-lg,
+  .col-sm {
+    flex: unset;
+    width: 100%;
 
-  
-  document.addEventListener("click", (e) => {
-    if (!profileArea.contains(e.target)) {
-      profileMenu.style.display = "none";
     }
-  });
-});
+  .logo a{
+    margin-right: 50px;
+  }
+}
+
+
+.profile {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding-top: 50px;
+}
+
+
+.profile img {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    cursor: pointer;
+    object-fit: cover;
+    border: 2px solid rgba(255,255,255,0.6);
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+
+}
+
+.profile img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 10px #0ef;
+}
+
+
+.profile-menu {
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 100%;
+    transform: translateX(-50%);
+    background: rgba(15,15,15,0.95);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 12px;
+    padding: 20px;
+    min-width: 180px;
+    display: none;
+    backdrop-filter: blur(10px);
+    z-index: 99999;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+}
+
+
+.profile-menu p {
+    font-size: 0.85rem;
+    opacity: 0.8;
+    margin-bottom: 10px;
+    word-break: break-word;
+    text-align: center;
+}
+
+
+.profile-menu button {
+    width: 100%;
+    padding: 8px;
+    border-radius: 8px;
+    background: #0ef;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.profile-menu button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 0 10px #0ef;
+}
+.profile-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.profile-hello {
+    font-size: 0.95rem;
+    opacity: 0.85;
+    color: #fff;
+    white-space: nowrap;
+    padding: 8px;
+    font-weight: 500;
+    pointer-events: none;
+    animation: lawak 1s linear infinite;
+}
+
+@keyframes lawak {
+  100% {
+    filter: hue-rotate(360deg);
+  }
+}
+
 
 
 

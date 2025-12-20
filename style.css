@@ -11,7 +11,7 @@ body {
   align-items: center;
   min-height: 100vh;
   background: transparent;
-  backdrop-filter: 20px;
+  backdrop-filter: blur(20px);
   background-image: url("gunung.jpg");
 }
 

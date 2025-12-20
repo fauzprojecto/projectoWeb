@@ -92,13 +92,13 @@ nav {
     will-change: transform,opacity;
     font-weight: 800;
     font-size: 20px;
+    margin-left: -10px;
 }
 
 .menu-toggle p:hover {
     text-shadow: 0 0 10px rgb(184, 243, 234);
     background: transparent;
     backdrop-filter: blur(10px);
-    bottom: 1px;
 }
 
 .menu-toggle p#menu-close{
@@ -390,6 +390,75 @@ nav {
     filter: hue-rotate(360deg);
   }
 }
+@media (max-width: 576px) {
+  .menu-overlay {
+    overflow-y: auto;
+  }
+
+  .menu-content {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    transform: none !important;
+    opacity: 1 !important;
+    padding-top: 80px;
+  }
+
+  
+  .menu-preview-img {
+    width: 80%;
+    height: 360px;            
+    overflow: hidden;
+    margin-bottom: 1.5em;
+    justify-content: center;
+  }
+
+  .menu-preview-img img {
+    object-fit: cover;
+    object-position: center;  
+  }
+
+  
+  .menu-items {
+    flex-direction: column;
+    padding: 1.5em;
+    gap: 2em;
+  }
+
+  .menu-items .col-lg,
+  .menu-items .col-sm {
+    width: 100%;
+    flex: unset;
+  }
+
+  
+  .menu-items .col-sm {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25em;
+    padding-bottom: 3em; 
+  }
+
+  .menu-link,
+  .menu-social {
+    gap: 0.5em;
+  }
+
+  .menu-footer {
+    position: relative;
+    padding: 1.5em;
+  }
+
+  .menu-footer .col-sm {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75em;
+    align-items: flex-start;
+  }
+}
+
+
+
 
 
 

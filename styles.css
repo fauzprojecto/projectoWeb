@@ -8,10 +8,10 @@
 
 html, body {
     width: 100%;
-    height: 100%;
+    min-height: 100%;
     overscroll-behavior: none;
     overflow-x:hidden;
-    background-color: #0f0f0f;
+    background-color: #000000;
     font-size: clamp(14px, 1.2vw, 16px);
 }
 
@@ -19,6 +19,139 @@ html, body {
 body {
     font-family: "TWK Lausanne", "Inter", sans-serif;
     overflow-x: hidden;
+}
+
+#menu-open, #menu-close{
+  border-radius: 5px;
+  padding: 8px;
+}
+#menu-open::before,
+#menu-open::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: conic-gradient(
+    from var(--deg),
+    #00c3ff,
+    #4d0199,
+    #6300c6,
+    #00c3ff
+  );
+  border-radius: inherit;
+  padding: 2px;
+  animation: autoRotate 2s linear infinite;
+  
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+}
+
+#menu-open::after {
+  filter: blur(10px);
+}
+#menu-close::before,
+#menu-close::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: conic-gradient(
+    from var(--deg),
+    #00c3ff,
+    #4d0199,
+    #6300c6,
+    #00c3ff
+  );
+  border-radius: inherit;
+  padding: 2px;
+  animation: autoRotate 2s linear infinite;
+  
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+}
+
+#menu-close::after {
+  filter: blur(10px);
+}
+.spacer  {
+     min-height: 100vh;
+    padding: 80px 0;       
+    background-color: #121922;
+}
+.spacew {
+  height: 100vh;
+  display: flex;
+  justify-content: center;   
+  align-items: center;       
+  gap: 200px;
+  flex-wrap: wrap;                
+}
+
+.spaceb {
+  width: 300px;
+  height: 400px;
+  background: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  aspect-ratio: 1/1;
+  position: relative;
+}
+
+.spaceb p {
+  color: white;
+  padding: 50px;
+  font-weight: 500;
+  font-size: 30px;
+  display: block;
+  word-break: break-word;
+  text-align: center;
+  line-height: 1.4;
+  overflow: visible;
+}
+
+@property --deg{
+    syntax: '<angle>';
+    inherits: true;
+    initial-value: 0deg;
+}
+.spaceb::before,
+.spaceb::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: conic-gradient(
+    from var(--deg),
+    #00c3ff,
+    #4d0199,
+    #6300c6,
+    #00c3ff
+  );
+  border-radius: inherit;
+  padding: 2px;
+  animation: autoRotate 2s linear infinite;
+  
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+}
+
+.spaceb::after {
+  filter: blur(10px);
+}
+
+
+@keyframes autoRotate {
+    to{
+        --deg: 360deg;
+    }
 }
 
 body.menu-open {
@@ -84,6 +217,7 @@ nav {
     width: 3rem;
     height: 1.5rem;
     cursor: pointer;
+    margin-right: 2%;
 }
 
 .menu-toggle p{
@@ -382,7 +516,7 @@ nav {
     padding: 8px;
     font-weight: 500;
     pointer-events: none;
-    animation: lawak 1s linear infinite;
+    animation: lawak 4s linear infinite;
 }
 
 @keyframes lawak {
@@ -455,7 +589,34 @@ nav {
     gap: 0.75em;
     align-items: flex-start;
   }
+  .menu-toggle{
+    margin-right: 6%;
 }
+
+  .profile-box {
+    margin-right: 50%;
+  }
+   .spacew {
+    flex-direction: column;
+    height: auto;
+    padding: 60px 0;
+    gap: 50px;
+  }
+
+  .spaceb {
+    width: 60%;
+    max-width: 320px;
+    height: 300px;
+  }
+  .spaceb p {
+    font-size: 20px;
+  }
+}
+
+
+
+
+
 
 
 

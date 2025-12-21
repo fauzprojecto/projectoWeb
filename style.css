@@ -12,7 +12,7 @@ body {
   min-height: 100vh;
   background: transparent;
   backdrop-filter: blur(20px);
-  background-image: url("gunung.jpg");
+  background-image: url("dark.png");
 }
 
 nav {
@@ -245,5 +245,6 @@ button {
     font-size: 13px;
   }
 }
+
 
 

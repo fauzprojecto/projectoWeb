@@ -10,7 +10,7 @@ html, body {
     width: 100%;
     min-height: 100%;
     overscroll-behavior: none;
-    overflow-x:hidden;
+    overflow-x: hidden;
     background-color: #000000;
     font-size: clamp(14px, 1.2vw, 16px);
 }
@@ -18,7 +18,6 @@ html, body {
 
 body {
     font-family: "TWK Lausanne", "Inter", sans-serif;
-    overflow-x: hidden;
 }
 
 #menu-open, #menu-close{
@@ -78,7 +77,7 @@ body {
   filter: blur(10px);
 }
 .spacer  {
-     min-height: 100vh;
+    min-height: 100vh;
     padding: 80px 0;       
     background-color: #121922;
 }
@@ -153,7 +152,53 @@ body {
         --deg: 360deg;
     }
 }
+.spacer2 .spacew2 {
+  width: 100vw;
+  background-color: #415d81;
+  min-height: 100vh;
+  display: flex;
+  flex-shrink: 0;
+  place-items: center;
+}
+.spacer2 {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+.spacew2 {
+  align-items: center;
+  justify-content: center;
+  gap: 0.8em;
+}
 
+.spacer2 .spacew2:nth-child(1){
+  background: #0f3330;
+}
+.spacer2 .spacew2:nth-child(2){
+  background: #7428a7;
+}
+.spacer2 .spacew2:nth-child(3){
+  background: #33759c;
+}
+.spacer2 .spacew2:nth-child(4){
+  background: #621a6d;
+}
+.spacew2 p  {
+  font-weight: 800;
+  font-size: 100px;
+  display: flex;
+  padding: 0px;
+  margin:  0px;
+}
+
+.lest {
+  background-color: black;
+  border-radius: 10px;
+  width: 250px;
+  justify-content: center;
+
+}
 body.menu-open {
     overflow: hidden;
     height: 100vh;
@@ -174,6 +219,7 @@ h1{
     letter-spacing: clamp(-0.05rem, -0.3vw, -0.2rem);
     font-weight: 400;
     line-height: 1;
+    pointer-events: none;
 }
 
 a, p{
@@ -610,6 +656,35 @@ nav {
   }
   .spaceb p {
     font-size: 20px;
+  }
+  .spacer2 .spacew2 {
+    padding: 20px;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .spacew2 p {
+    font-size: clamp(42px, 12vw, 64px);
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  .lest {
+    padding: 10px 18px;
+    border-radius: 10px;
+    width: 125px;
+    height: 50px;
+  }
+
+  .lest span {
+    display: inline-block;
+  }
+
+  .git {
+    font-size: clamp(28px, 8vw, 42px);
+    margin-top: 12px;
+    white-space: nowrap;
   }
 }
 
